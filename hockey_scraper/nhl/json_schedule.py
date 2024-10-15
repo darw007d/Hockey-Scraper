@@ -5,7 +5,6 @@ import json
 from pytz import timezone
 from datetime import date, datetime, timedelta
 import hockey_scraper.utils.shared as shared
-import pytz
 
 from tqdm import tqdm
 from traitlets.traitlets import _validate_bounds
