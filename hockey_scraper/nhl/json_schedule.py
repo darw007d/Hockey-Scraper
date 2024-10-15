@@ -3,10 +3,11 @@ This module contains functions to scrape the json schedule for any games or date
 """
 import json
 from pytz import timezone
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import hockey_scraper.utils.shared as shared
 
 from tqdm import tqdm
+from traitlets.traitlets import _validate_bounds
 
 
 # TODO: Currently rescraping page each time since the status of some games may have changed
@@ -72,7 +73,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
     
     :return: list with all the game id's
     """
-    print("Scraping the schedule between {} and {}...please give it a moment".format(date_from, date_to))
+    print("Scraping test ta mere the schedule between {} and {}...please give it a moment".format(date_from, date_to))
 
     est = timezone("America/New_York")
 
@@ -92,9 +93,18 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 
                 # TODO: Confirm if OFF is correct
                 # Check game is over or scraping live
+                print(game['gameState'])
                 status_cond = game['gameState'] == 'OFF' or not_over
                 # No preseason or "special" games
                 valid_game_cond = (game_id >= 20000 or preseason) and game_id < 40000
+                print(f"1- {valid_game_cond}")
+                if (date(date_from) >= date("2024-07-01")) :
+                    valid_game_cond = (game_id >= 2024020000) or preseason
+                    if (date(date_from) < date.today()) :
+                      game['gameState'] == "FINAL"
+                else :
+                    game['gameState'] == "OFF"
+                print(f"2- {valid_game_cond}")
                 # Within specified date ranges
                 game_date = datetime.strptime(game['startTimeUTC'], "%Y-%m-%dT%H:%M:%S%z")
                 date_cond = fdate_est <= game_date.astimezone(est) <= tdate_est
