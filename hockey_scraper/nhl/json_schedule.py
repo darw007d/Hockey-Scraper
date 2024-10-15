@@ -5,6 +5,7 @@ import json
 from pytz import timezone
 from datetime import date, datetime, timedelta
 import hockey_scraper.utils.shared as shared
+import pytz
 
 from tqdm import tqdm
 from traitlets.traitlets import _validate_bounds
@@ -84,7 +85,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
     tdate_est = datetime(tds[0], tds[1], tds[2], 23, 59, tzinfo=est)
     sea_date = datetime(2024,7,1,00,00, tzinfo=est)
     date_object = date.today()
-    today_date = eastern.localize(datetime.combine(date_object, datetime.min.time()))
+    today_date = est.localize(datetime.combine(date_object, datetime.min.time()))
 
     schedule = []
     schedule_json = chunk_schedule_calls(date_from, date_to)
