@@ -121,7 +121,7 @@ def scrape_schedule(from_date, to_date, data_format='pandas', rescrape=False, do
     shared.if_rescrape(rescrape)
 
     # live = True allows us to scrape games that aren't final
-    sched = json_schedule.scrape_schedule(from_date, to_date, preseason=False, not_over=True)
+    sched = json_schedule.scrape_schedule(from_date, to_date, preseason=True, not_over=True)
     sched_df = pd.DataFrame(sched, columns=cols)
 
     if data_format.lower() == 'csv':
