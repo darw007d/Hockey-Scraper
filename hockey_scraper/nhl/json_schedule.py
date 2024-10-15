@@ -104,6 +104,8 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 game_date = datetime.strptime(game['startTimeUTC'], "%Y-%m-%dT%H:%M:%S%z")
                 date_cond = fdate_est <= game_date.astimezone(est) <= tdate_est
 
+                # need to work on solution for status, offseason game being treated as such and normal schedule, might necessitate to add a new column with an enrichment on this status based of dates, and game_id 
+                
                 if status_cond and valid_game_cond and date_cond:
                     schedule.append({
                         "game_id": game['id'], 
