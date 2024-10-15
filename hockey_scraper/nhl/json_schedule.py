@@ -84,7 +84,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
     tdate_est = datetime(tds[0], tds[1], tds[2], 23, 59, tzinfo=est)
     sea_date = datetime(2024,7,1,00,00, tzinfo=est)
     date_object = date.today()
-    today_date = datetime.combine(date_object, datetime.min.time())
+    today_date = datetime.combine(date_object, datetime.min.time(), tzinfo=est)
 
     schedule = []
     schedule_json = chunk_schedule_calls(date_from, date_to)
