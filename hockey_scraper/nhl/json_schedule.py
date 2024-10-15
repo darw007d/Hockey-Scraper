@@ -104,7 +104,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                     valid_game_cond = (game_id >= 2024020000)
                     if (fdate_est <= today_date) :
                       game['gameState'] == "FINAL"
-                    if valid_game_cond = False :
+                    if valid_game_cond == False :
                         game['gameState'] == "OFF"
                 print(f"2- {valid_game_cond}")
                 # Within specified date ranges
