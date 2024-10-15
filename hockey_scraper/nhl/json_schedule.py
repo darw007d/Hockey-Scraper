@@ -98,7 +98,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 # Check game is over or scraping live
                 status_cond = game['gameState'] == 'OFF' or not_over
                 # No preseason or "special" games
-                valid_game_cond = (game_id >= 10000 or preseason) and game_id < 20000
+                valid_game_cond = (game_id >= 20000 or preseason) and game_id < 40000
                 # Within specified date ranges
                 game_date = datetime.strptime(game['startTimeUTC'], "%Y-%m-%dT%H:%M:%S%z")
                 date_cond = fdate_est <= game_date.astimezone(est) <= tdate_est
