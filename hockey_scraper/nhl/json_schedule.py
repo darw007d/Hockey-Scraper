@@ -100,11 +100,11 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 # No preseason or "special" games
                 valid_game_cond = (game_id >= 20000 or preseason) and game_id < 40000
                 if (fdate_est >= sea_date) :
-                    valid_game_cond = (game_id >= 2024020000)
-                    if (fdate_est <= today_date) :
-                      game['gameState'] == "FINAL"
-                    if valid_game_cond == False :
+                    if (game_id < 2024020000)
                         game['gameState'] == "OFF"
+                    else :
+                        if ((game['gameState'] == "OFF") & (fdate_est < today_date))  :
+                            (game['gameState'] == "FINAL")
                 # Within specified date ranges
                 game_date = datetime.strptime(game['startTimeUTC'], "%Y-%m-%dT%H:%M:%S%z")
                 date_cond = fdate_est <= game_date.astimezone(est) <= tdate_est
