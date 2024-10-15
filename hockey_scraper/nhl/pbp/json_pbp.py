@@ -41,13 +41,10 @@ def get_teams(pbp_json):
     :return: dict with home and away
     """
     return {
-<<<<<<< HEAD
         'Home': pbp_json['homeTeam']['abbrev'],
-        'Away': pbp_json['awayTeam']['abbrev']
-=======
+        'Away': pbp_json['awayTeam']['abbrev'],
         'Home': shared.convert_tricode(pbp_json['homeTeam']['abbrev']),
         'Away': shared.convert_tricode(pbp_json['awayTeam']['abbrev'])
->>>>>>> 1029299054fbe671c3ca9c5d413cdfd102416853
     }
 
 
@@ -94,15 +91,12 @@ def parse_event(event):
     play = dict()
 
     play['event_id'] = event['eventId']
-<<<<<<< HEAD
     play['period'] = event['period']
-=======
     play['period'] = event['periodDescriptor']['number']
->>>>>>> 1029299054fbe671c3ca9c5d413cdfd102416853
     play['event'] = str(change_event_name(event['typeDescKey'].upper()))
     play['seconds_elapsed'] = shared.convert_to_seconds(event['timeInPeriod'])
-    
     play['p1_name'], play['p2_name'], play['p3_name'] = '', '', ''
+    
     if 'details' in event.keys():
         details = event['details'].keys()
         # If there's a players key that means an event occurred on the play.
