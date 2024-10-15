@@ -82,7 +82,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
     fdate_est = datetime(fds[0], fds[1], fds[2], 0, 0, tzinfo=est)
     tds = list(map(int, date_to.split("-")))
     tdate_est = datetime(tds[0], tds[1], tds[2], 23, 59, tzinfo=est)
-    sea_date = datetime("2024","07","01",00,00, tzinfo=est)
+    sea_date = datetime(2024,7,1,00,00, tzinfo=est)
 
     schedule = []
     schedule_json = chunk_schedule_calls(date_from, date_to)
