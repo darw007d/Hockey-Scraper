@@ -112,7 +112,7 @@ def scrape_schedule(from_date, to_date, data_format='pandas', rescrape=False, do
     
     :return: DataFrame of None
     """
-    cols = ["game_id", "date", "venue", "home_team", "away_team", "start_time", "home_score", "away_score", "status"]
+    cols = ["game_id", "date", "venue", "home_team", "away_team", "start_time", "home_score", "away_score", "status","type"]
 
     shared.check_data_format(data_format)
     shared.check_valid_dates(from_date, to_date)
