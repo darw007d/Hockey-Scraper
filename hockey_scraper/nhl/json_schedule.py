@@ -110,16 +110,17 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 # need to work on solution for status, offseason game being treated as such and normal schedule, might necessitate to add a new column with an enrichment on this status based of dates, and game_id 
                 game["StateOfGame"] = "OFF"
 
-                if ((game_id >= 10000) and game_id < 20000) :
+                if ((game_id >= 10000) and (game_id < 20000)) :
                     game["StateOfGame"] = "OFFSEASON"
                 else :
-                    if ((game_id >= 20000) and game_id < 40000) :
+                    if ((game_id >= 20000) and (game_id < 40000)) :
                         if (game_date_est_final < today_date) :
                             game["StateOfGame"] = "SEA_FINAL"
-                        if ((game_date_est <= today_date) and game_date_est_final > today_date) :
-                            game["StateOfGame"] = "SEA_LIVE"
                         else :
-                            game["StateOfGame"] = "SEA_SCHEDULED"
+                            if ((game_date_est <= today_date) and (game_date_est_final > today_date)) :
+                                game["StateOfGame"] = "SEA_LIVE"
+                            else :
+                                game["StateOfGame"] = "SEA_SCHEDULED"
                     else :
                         game["StateOfGame"] = "PLAYOFF"
                 
