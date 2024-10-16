@@ -95,7 +95,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
             for game in day['games']:
                 # removing the year and 0 from the beginning of the id can tell you if it's an Offseason game (10000 to 20000) or regular season (20000 to 40000) probably playoffs in there 
                 game_id = int(str(game['id'])[5:])
-                
+                print(game_id)
                 # TODO: Confirm if OFF is correct
                 # Check game is over or scraping live
                 status_cond = game['gameState'] == 'OFF' or not_over
