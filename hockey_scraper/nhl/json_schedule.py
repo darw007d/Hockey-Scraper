@@ -95,7 +95,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
             for game in day['games']:
                 # removing the year and 0 from the beginning of the id can tell you if it's an Offseason game (10000 to 20000) or regular season (20000 to 40000) probably playoffs in there 
                 game_id = int(str(game['id'])[5:])
-                print(game_id)
+                
                 # TODO: Confirm if OFF is correct
                 # Check game is over or scraping live
                 status_cond = game['gameState'] == 'OFF' or not_over
@@ -112,15 +112,16 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
 
                 if ((game_id >= 10000) and game_id < 20000) :
                     game["StateOfGame"] = "OFFSEASON"
-                if ((game_id >= 20000) and game_id < 40000) :
-                    if (game_date_est_final < today_date) :
-                        game["StateOfGame"] = "SEA_FINAL"
-                    if ((game_date_est <= today_date) and game_date_est_final > today_date) :
-                        game["StateOfGame"] = "SEA_LIVE"
-                    else :
-                        game["StateOfGame"] = "SEA_SCHEDULED"
                 else :
-                    game["StateOfGame"] = "PLAYOFF"
+                    if ((game_id >= 20000) and game_id < 40000) :
+                        if (game_date_est_final < today_date) :
+                            game["StateOfGame"] = "SEA_FINAL"
+                        if ((game_date_est <= today_date) and game_date_est_final > today_date) :
+                            game["StateOfGame"] = "SEA_LIVE"
+                        else :
+                            game["StateOfGame"] = "SEA_SCHEDULED"
+                    else :
+                        game["StateOfGame"] = "PLAYOFF"
                 
                 if status_cond and valid_game_cond and date_cond:
                     schedule.append({
