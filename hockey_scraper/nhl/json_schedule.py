@@ -105,6 +105,19 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 date_cond = fdate_est <= game_date.astimezone(est) <= tdate_est
 
                 # need to work on solution for status, offseason game being treated as such and normal schedule, might necessitate to add a new column with an enrichment on this status based of dates, and game_id 
+                game["StateOfGame"] = "OFF"
+
+                if (game_id >= 10000 & game_id < 20000) :
+                    game["StateOfGame"] = "OFF"
+                if (game_id >= 20000 & game_id < 40000) :
+                    if (tdate_est < today_date) :
+                        game["StateOfGame"] = "FINAL"
+                    if (fdate_est <= today_date & tdate_est > today_date) :
+                        game["StateOfGame"] = "LIVE"
+                    else :
+                        game["StateOfGame"] = "SCHEDULED"
+                else :
+                    game["StateOfGame"] = "PLAYOFF"
                 
                 if status_cond and valid_game_cond and date_cond:
                     schedule.append({
