@@ -113,11 +113,11 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 if ((game_id >= 10000) and (game_id < 20000)) :
                     if (game_date_est_final < today_date) :
                             game["StateOfGame"] = "OFF_FINAL"
+                    else :
+                        if ((game_date_est <= today_date) and (game_date_est_final > today_date)) :
+                            game["StateOfGame"] = "OFF_LIVE"
                         else :
-                            if ((game_date_est <= today_date) and (game_date_est_final > today_date)) :
-                                game["StateOfGame"] = "OFF_LIVE"
-                            else :
-                                game["StateOfGame"] = "OFF_SCHEDULED"
+                            game["StateOfGame"] = "OFF_SCHEDULED"
                 else :
                     if ((game_id >= 20000) and (game_id < 40000)) :
                         if (game_date_est_final < today_date) :
