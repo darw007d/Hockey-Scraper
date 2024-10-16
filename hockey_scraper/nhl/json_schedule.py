@@ -104,6 +104,8 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 # Within specified date ranges
                 game_date = datetime.strptime(game['startTimeUTC'], "%Y-%m-%dT%H:%M:%S%z")
                 date_cond = fdate_est <= game_date.astimezone(est) <= tdate_est
+                game_date_est = game_date.astimezone(est)
+                game_date_est_final = game_date.astimezone(est) + timedelta(hours=3)
 
                 # need to work on solution for status, offseason game being treated as such and normal schedule, might necessitate to add a new column with an enrichment on this status based of dates, and game_id 
                 game["StateOfGame"] = "OFF"
@@ -111,9 +113,9 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 if ((game_id >= 10000) and game_id < 20000) :
                     game["StateOfGame"] = "OFFSEASON"
                 if ((game_id >= 20000) and game_id < 40000) :
-                    if (tdate_est < today_date) :
+                    if (game_date_est_final < today_date) :
                         game["StateOfGame"] = "SEA_FINAL"
-                    if ((fdate_est <= today_date)and tdate_est > today_date) :
+                    if ((game_date_est <= today_date) and game_date_est_final > today_date) :
                         game["StateOfGame"] = "SEA_LIVE"
                     else :
                         game["StateOfGame"] = "SEA_SCHEDULED"
