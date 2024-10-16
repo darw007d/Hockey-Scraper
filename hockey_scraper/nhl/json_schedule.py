@@ -130,7 +130,7 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                         "away_team": shared.convert_tricode(game['awayTeam']['abbrev']),
                         "home_score": game['homeTeam'].get("score"),
                         "away_score": game['awayTeam'].get("score"),
-                        "status": game["gameState"]
+                        "status": game["gameState"],
                         "type": game["StateOfGame"]
                     })
 
