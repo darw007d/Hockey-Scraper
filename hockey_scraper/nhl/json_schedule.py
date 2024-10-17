@@ -1,4 +1,3 @@
-
 """
 This module contains functions to scrape the json schedule for any games or date range
 """
@@ -110,18 +109,6 @@ def scrape_schedule(date_from, date_to, preseason=False, not_over=False):
                 # need to work on solution for status, offseason game being treated as such and normal schedule, might necessitate to add a new column with an enrichment on this status based of dates, and game_id 
                 game["StateOfGame"] = "OFF"
 
-               """
-               apply elif structure
-               if 10000 <= game_id < 20000:
-                    if game_date_est_final < today_date:
-                        game["StateOfGame"] = "OFF_FINAL"
-                    elif game_date_est <= today_date < game_date_est_final:
-                        game["StateOfGame"] = "OFF_LIVE"
-                    else:
-                        game["StateOfGame"] = "OFF_SCHEDULED"
-                elif 20000 <= game_id < 40000:
-                    ... (rest of the code for this condition)
-                """
                 if ((game_id >= 10000) and (game_id < 20000)) :
                     if (game_date_est_final < today_date) :
                             game["StateOfGame"] = "OFF_FINAL"
